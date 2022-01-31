@@ -1,14 +1,6 @@
-import {useRouter} from 'next/router'
-import { useState, useEffect } from 'react'
-
-import { Head } from 'next/head'
 import Header from '../../components/Header' 
 
 const team = ({selectedTeam}) => {
-    const router = useRouter()
-    const {id} = router.query
-    const [ team, setTeam ] = useState(null)
-    
     if (selectedTeam) {
         return (
             <div>
@@ -16,7 +8,11 @@ const team = ({selectedTeam}) => {
             </div>
         )
     }
-    else return null
+    else return (
+        <div>
+            <h1>404 error: Page not found</h1>
+        </div>
+    )
 }
 export default team
 
@@ -26,11 +22,12 @@ export const getServerSideProps = async (context) => {
     const teams = require("../../teamData.json")
 
     // select the correct team by route
-    let selectedTeam = []
+    let selectedTeam: [string, string, object, string]
     teams.forEach( team => {
-        if (team.id === id) selectedTeam = team
+        if (team.id === id) {
+            selectedTeam = team
+        }
     })
-
     return {
         props: {selectedTeam}
     }

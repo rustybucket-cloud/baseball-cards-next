@@ -1,6 +1,14 @@
 import styles from "../styles/Header.module.css"
+const teams = require("../teamData.json")
+import Router from "next/router";
 
 function Header(props) {
+    // routes to another team page
+    const handleChange = ({currentTarget}) => {
+        if (currentTarget.value === "select team") return
+        Router.push(`/teams/${currentTarget.value}`)
+    }
+
     return (
         <div style={{backgroundColor: props.backgroundColor, color: props.letterColor}} className={styles.headerWrapper}>
             <header className={styles.header}>
@@ -10,8 +18,9 @@ function Header(props) {
                 </div>
                 
                 <nav className={styles.nav}>
-                    <select>
-                        <option>Select One</option>
+                    <select onChange={handleChange}>
+                        <option value="select team">Select Team</option>
+                        { teams.map( (team, i) => <option value={team.id} key={i}>{team.team}</option>)}
                     </select>
                     <ul className={styles.ul}>
                         <li>Pitchers</li>
