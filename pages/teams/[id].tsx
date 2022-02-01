@@ -10,7 +10,7 @@ const team = ({team, roster}) => {
             <div>
                 <Header img={team.logo} team={team.team} backgroundColor={team.color.background} textColor={team.color.text} />
                 <main className={`${styles.cards} ${mainStyles.main}`}>
-                    { roster.map((player,i) => <Card data={player} primaryColor={team.color.background} secondaryColor={team.color.letter} id={player.player_id} />) }
+                    { roster.map((player,i) => <Card key={i} data={player} primaryColor={team.color.background} secondaryColor={team.color.letter} id={player.player_id} />) }
                 </main>
             </div>
         )

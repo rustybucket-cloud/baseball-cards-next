@@ -42,9 +42,9 @@ function Card(props) {
                 </div>
                 <div className={`${styles.card__face_back} ${styles.card__face}`} style={{backgroundColor: props.secondaryColor, fontSize: '14px', display: 'flex', flexDirection: "column", alignItems: 'center'}}>
                     <div>
-                        <p>6'2 250lbs</p>
+                        <p>6&apos;2 250lbs</p>
                         <p>Throws: R Bats: R</p>
-                        <p className="mb-0">Career Stats</p>
+                        <p>Career Stats</p>
                         {player.primary_position !== 'P' ? <table style={{fontSize: '14px', textAlign: 'center'}}>
                             <thead>
                                 <th>G</th>
