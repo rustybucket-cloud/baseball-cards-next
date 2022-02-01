@@ -1,11 +1,16 @@
 .headerWrapper {
     box-shadow: 0 3px 5px 1px #333333;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 9;
+    height: 6rem;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
     max-width: 72rem;
     margin: auto;
     width: 100%;
@@ -14,6 +19,7 @@
 .teamData {
     display: flex; 
     align-items: center;
+    justify-content: flex-start;
 }
 
 .logo {

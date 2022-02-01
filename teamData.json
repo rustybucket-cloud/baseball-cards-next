@@ -2,19 +2,85 @@
     {
         "id": "144",
         "team":"Atlanta Braves",
-        "color": {"background": "rgb(186, 12, 47)", "letter": "#13274F"},
+        "color": {"background": "rgb(186, 12, 47)", "letter": "#13274F", "text": "black"},
         "logo": "https://images.ctfassets.net/iiozhi00a8lc/t144_header_primaryATL_LOGO_092019_svg/0a0c5d63140ac6861ed8ccf9d47aa4ee/t144_header_primary.svg"
     },
     {
         "id": "109",
         "team":"Arizona Diamondbacks",
-        "color": {"background": "rgb(167, 25, 48)", "letter": "rgb(0,0,0)"},
+        "color": {"background": "rgb(167, 25, 48)", "letter": "rgb(0,0,0)", "text": "black"},
         "logo": "https://images.ctfassets.net/iiozhi00a8lc/t109_header_primaryARI_Logo_svg/cf026e4f314247964a3ff26a3934ca5f/t109_header_primary.svg"
+    },
+    {
+        "id": "110",
+        "team": "Baltimore Orioles",
+        "color": {"background": "#DF4601", "letter": "#000000", "text": "black"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/110.svg"
     },
     {
         "id": "111",
         "team":"Boston Red Sox",
-        "color": {"background": "rgb(189, 48, 57)', letter: 'rgb(12,35,64)"},
+        "color": {"background": "rgb(189, 48, 57)", "letter": "rgb(12,35,64)", "text": "black"},
         "logo": "https://images.ctfassets.net/iiozhi00a8lc/t111_header_primarybos_primart_header_logo_svg/2b1d10de1b49920faed03084da22b2b7/t111_header_primary.svg"
+    },
+    {
+        "id": "112",
+        "team": "Chicago Cubs",
+        "color": {"background": "#0e3386", "letter": "#cc3433", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/112.svg"
+    },
+    {
+        "id": "113",
+        "team": "Cincinnati Reds",
+        "color": {"background": "#C6011F", "letter": "#000000", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/113.svg"
+    },
+    {
+        "id": "114",
+        "team": "Cleveland Guardians",
+        "color": {"background": "#0C2340", "letter": "#E31937", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/114.svg"
+    },
+    {
+        "id": "115",
+        "team": "Colorado Rockies",
+        "color": {"background": "#33006F", "letter": "#C4CED4", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/115.svg"
+    },
+    {
+        "id": "116",
+        "team": "Detroit Tigers",
+        "color": {"background": "#0C2340", "letter": "#FA4616", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/116.svg"
+    },
+    {
+        "id": "117",
+        "team": "Houston Astros",
+        "color": {"background": "#002D62", "letter": "#EB6E1F", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/117.svg"
+    },
+    {
+        "id": "118",
+        "team": "Kansas City Royals",
+        "color": {"background": "#004687", "letter": "#BD9B60", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/118.svg"
+    },
+    {
+        "id": "119",
+        "team": "Los Angeles Dodgers",
+        "color": {"background": "#005A9C", "letter": "#A5ACAF", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/119.svg"
+    },
+    {
+        "id": "120",
+        "team": "Washington Nationals",
+        "color": {"background": "#AB0003", "letter": "#14225A", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/120.svg"
+    },
+    {
+        "id": "121",
+        "team": "New York Mets",
+        "color": {"background": "#002D72", "letter": "#FF5910", "text": "white"},
+        "logo": "https://www.mlbstatic.com/team-logos/team-cap-on-dark/121.svg"
     }
 ]

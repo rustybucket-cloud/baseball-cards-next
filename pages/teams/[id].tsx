@@ -1,10 +1,17 @@
-import Header from '../../components/Header' 
+import Header from '../../components/Header'
+import Card from '../../components/Card'
 
-const team = ({selectedTeam}) => {
-    if (selectedTeam) {
+import styles from "../../styles/Teams.module.css"
+import mainStyles from "../../styles/Main.module.css"
+
+const team = ({team, roster}) => {
+    if (team) {
         return (
             <div>
-                <Header img={selectedTeam.logo} team={selectedTeam.team} backgroundColor={selectedTeam.color.background} letter={selectedTeam.color.letter} />
+                <Header img={team.logo} team={team.team} backgroundColor={team.color.background} textColor={team.color.text} />
+                <main className={`${styles.cards} ${mainStyles.main}`}>
+                    { roster.map((player,i) => <Card data={player} primaryColor={team.color.background} secondaryColor={team.color.letter} id={player.player_id} />) }
+                </main>
             </div>
         )
     }
@@ -22,13 +29,25 @@ export const getServerSideProps = async (context) => {
     const teams = require("../../teamData.json")
 
     // select the correct team by route
-    let selectedTeam: [string, string, object, string]
-    teams.forEach( team => {
-        if (team.id === id) {
-            selectedTeam = team
+    let team: [string, string, object, string]
+    teams.forEach( selectedTeam => {
+        if (selectedTeam.id === id) {
+            team = selectedTeam
         }
     })
+
+    // fetch player roster data
+    const res = await fetch(`https://mlb-data.p.rapidapi.com/json/named.roster_team_alltime.bam?end_season='2021'&team_id='${id}'&start_season='2021'&all_star_sw='N'&sort_order=name_asc`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
+		"x-rapidapi-key": "c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8"
+	}
+    })
+    const data = await res.json()
+    const roster = data.roster_team_alltime.queryResults.row
+
     return {
-        props: {selectedTeam}
+        props: {team, roster}
     }
 }

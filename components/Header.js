@@ -10,7 +10,7 @@ function Header(props) {
     }
 
     return (
-        <div style={{backgroundColor: props.backgroundColor, color: props.letterColor}} className={styles.headerWrapper}>
+        <div style={{backgroundColor: props.backgroundColor, color: props.textColor}} className={styles.headerWrapper}>
             <header className={styles.header}>
                 <div className={styles.teamData}>
                     <figure className={styles.logo}><img className={styles.img} src={props.img} /></figure>
