@@ -17,7 +17,7 @@ function Card(props) {
             url: '/api/playerinfo',
             params: {id: `${props.id}`, position: player.primary_position},
         };
-        axios.request(options).then(function (response) {
+        axios.request({method: "GET", url: '/api/playerinfo', params: {id: `${props.id}`, position: player.primary_position}}).then(function (response) {
             setStats(response.data)
             if (player.primary_position === 'p') console.log(response.data)
         })
