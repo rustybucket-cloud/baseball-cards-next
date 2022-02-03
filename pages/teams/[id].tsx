@@ -1,5 +1,6 @@
 import Header from '../../components/Header'
 import Card from '../../components/Card'
+import Head from 'next/head'
 
 import styles from "../../styles/Teams.module.css"
 import mainStyles from "../../styles/Main.module.css"
@@ -8,10 +9,16 @@ const team = ({team, roster}) => {
     if (team) {
         return (
             <div>
+                <Head>
+                    <title>{team.teams}</title>
+                    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossOrigin="anonymous"/>
+                </Head>
                 <Header img={team.logo} team={team.team} backgroundColor={team.color.background} textColor={team.color.text} />
-                <main className={`${styles.cards} ${mainStyles.main}`}>
-                    { roster.map((player,i) => <Card key={i} data={player} primaryColor={team.color.background} secondaryColor={team.color.letter} id={player.player_id} />) }
-                </main>
+                <div className={mainStyles.mainWrapper}>
+                    <main className={`${styles.cards} ${mainStyles.main}`}>
+                        { roster.map((player,i) => <Card key={i} data={player} primaryColor={team.color.background} secondaryColor={team.color.letter} id={player.player_id} />) }
+                    </main>
+                </div>
             </div>
         )
     }

@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header img={'https://images.ctfassets.net/iiozhi00a8lc/t144_header_primaryATL_LOGO_092019_svg/0a0c5d63140ac6861ed8ccf9d47aa4ee/t144_header_primary.svg'} team={'Atlanta Braves'} backgroundColor={'rgb(186, 12, 47)'} letter={'#13274F'} />
+      <Header img={'https://www.mlbstatic.com/team-logos/league-on-dark/1.svg'} team={'MLB Data'} backgroundColor={'#002D72'} textColor={'white'} />
     </div>
   )
 }

@@ -22,6 +22,10 @@
     justify-content: flex-start;
 }
 
+.hamburger {
+    font-size: 1.5rem;
+}
+
 .logo {
     width: 3rem;
     height: auto;
@@ -32,10 +36,15 @@
 }
 
 .nav {
-    display: flex;
+    display: none;
 }
 .ul {
     display: flex;
     list-style-type: none;
     gap: 1rem;
+}
+
+@media screen and (min-width: 50rem) {
+    .nav { display: flex; }
+    .hamburger { display: none; }
 }

@@ -2,6 +2,14 @@ import styles from "../styles/Header.module.css"
 const teams = require("../teamData.json")
 import Router from "next/router";
 
+import Link from "next/link";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from "@fortawesome/free-solid-svg-icons"
+/* import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas) */
+
 function Header(props) {
     // routes to another team page
     const handleChange = ({currentTarget}) => {
@@ -23,11 +31,12 @@ function Header(props) {
                         { teams.map( (team, i) => <option value={team.id} key={i}>{team.team}</option>)}
                     </select>
                     <ul className={styles.ul}>
-                        <li>Pitchers</li>
-                        <li>Position Players</li>
-                        <li>All Players</li>
+                        <li>Team Rosters</li>
+                        <li>Team Stats</li>
+                        <li>Records</li>
                     </ul>
                 </nav>
+                <FontAwesomeIcon icon={faBars} className={styles.hamburger} />
             </header>
         </div>
     );
