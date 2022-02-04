@@ -1,10 +1,14 @@
 import styles from "../styles/Card.module.css";
 import { useState, useEffect } from "react"
 import axios from "axios";
+import Link from "next/link";
 
 function Card(props) {
     const [ flipped, setFlipped ] = useState(false)
     const [ stats, setStats ] = useState(null)
+    const [ height, setHeight ] = useState(null)
+    const [ weight, setWeight ] = useState(null)
+    const [ hand, setHand ] = useState(null)
 
     const player = props.data
 
@@ -18,8 +22,10 @@ function Card(props) {
             params: {id: `${props.id}`, position: player.primary_position},
         };
         axios.request({method: "GET", url: '/api/playerinfo', params: {id: `${props.id}`, position: player.primary_position}}).then(function (response) {
-            setStats(response.data)
-            if (player.primary_position === 'p') console.log(response.data)
+            setStats(response.data.stats)
+            setHeight(response.data.height)
+            setWeight(response.data.weight)
+            setHand(response.data.hand)
         })
     }, [])
 
@@ -37,13 +43,13 @@ function Card(props) {
             <div className={`${styles.card} ${flipped ? styles.is_flipped : null }`}>
                 <div className={`${styles.card__face} ${styles.face_front}`} style={{backgroundColor: props.primaryColor}}>
                     <h3>{player.name_first_last}</h3>
-                    <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:silo:current.png/r_max/w_180,q_auto:best/v1/people/${player.player_id}/headshot/silo/current`} style={{width: '9rem', height: 'auto'}}/>
-                    <p className="">{player.primary_position}</p>
+                    <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:silo:current.png/r_max/w_180,q_auto:best/v1/people/${player.player_id}/headshot/silo/current`} style={{width: '9rem', height: 'auto'}} loading="lazy"/>
+                    <p>{player.primary_position}</p>
                 </div>
                 <div className={`${styles.card__face_back} ${styles.card__face}`} style={{backgroundColor: props.secondaryColor, fontSize: '14px', display: 'flex', flexDirection: "column", alignItems: 'center'}}>
                     <div>
-                        <p>6&apos;2 250lbs</p>
-                        <p>Throws: R Bats: R</p>
+                        <p>{height} {weight}lbs</p>
+                        <p>{hand}</p>
                         <p>Career Stats</p>
                         {player.primary_position !== 'P' ? <table style={{fontSize: '14px', textAlign: 'center'}}>
                             <thead>
@@ -83,6 +89,7 @@ function Card(props) {
                             </tbody>
                         </table>
                         }
+                        <Link href={`/player/${props.id}`}><p style={{fontSize: ".8rem"}}>View All Stats</p></Link>
                     </div>
                     
                 </div>

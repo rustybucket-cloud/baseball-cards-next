@@ -1,0 +1,12 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table tr:nth-child(even) {
+    background-color: rgb(185, 185, 185);
+}
+
+.thead > th {
+    text-align: left;
+}

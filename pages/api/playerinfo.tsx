@@ -6,9 +6,20 @@ require('dotenv').config()
  * @param req user query, containts player id and player position
  * @param res response, sends player stats
  */
-export default function handler(req, res) {
+export default function handler(req, res) : void {
     const id = req.query.id
     const position = req.query.position
+
+    let infoOptions = {
+        method: 'GET',
+        url: 'https://mlb-data.p.rapidapi.com/json/named.player_info.bam',
+        params: {sport_code: '\'mlb\'', player_id: `\'${id}\'`},
+        headers: {
+            'x-rapidapi-host': 'mlb-data.p.rapidapi.com',
+            'x-rapidapi-key': 'c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8'
+        }
+    }
+    
     
     // gets player stats from rapidapi and responds
     let options: object;
@@ -34,9 +45,15 @@ export default function handler(req, res) {
         };
     }
 
-    axios.request(options).then(function (response) {
-        res.status(200).send(position === 'P' ? response.data.sport_career_pitching.queryResults.row : response.data.sport_career_hitting.queryResults.row)
+    axios.request(infoOptions).then( (response) => {
+        const { height_feet, height_inches, weight, throws, bats } = response.data.player_info.queryResults.row
+
+        axios.request(options).then(function (response) {
+            const stats = position === 'P' ? response.data.sport_career_pitching.queryResults.row : response.data.sport_career_hitting.queryResults.row
+            res.status(200).send({ height: `${height_feet}'${height_inches}"`, weight, stats, hand: `Throws: ${throws} Bats: ${bats}` })
+        })
     })
+    
     .catch(function (error) {
         console.error(error);
     });
