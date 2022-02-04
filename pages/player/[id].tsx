@@ -1,7 +1,7 @@
 import mainStyles from "../../styles/Main.module.css"
 import styles from "../../styles/Player.module.css"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 const axios = require("axios").default;
 
 import Header from "../../components/Header"
@@ -9,32 +9,32 @@ import Header from "../../components/Header"
 const player = ({name, height, weight, position, birthLocation, id, startYear}) => {
     const [ stats, setStats ] = useState([])
 
-    useEffect( () => {
+    const getData = useCallback( async () => {
         let currentYear = new Date().getFullYear()
-
-        const getData = async () => {
-            for (let i = startYear; i <= currentYear; i++) {
-                const options = {
-                    method: 'GET',
-                    url: 'https://mlb-data.p.rapidapi.com/json/named.sport_hitting_tm.bam',
-                    params: {
-                    league_list_id: '\'mlb\'',
-                    game_type: '\'R\'',
-                    season: `\'${i}\'`,
-                    player_id: `\'${id}\'`
-                    },
-                    headers: {
-                    'x-rapidapi-host': 'mlb-data.p.rapidapi.com',
-                    'x-rapidapi-key': 'c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8'
-                    }
-                };
-                const res = await axios.request(options)
-                const data = res.data.sport_hitting_tm.queryResults.row
-                setStats(stats => [...stats, data ])
-            }
+        for (let i = startYear; i <= currentYear; i++) {
+            const options = {
+                method: 'GET',
+                url: 'https://mlb-data.p.rapidapi.com/json/named.sport_hitting_tm.bam',
+                params: {
+                league_list_id: '\'mlb\'',
+                game_type: '\'R\'',
+                season: `\'${i}\'`,
+                player_id: `\'${id}\'`
+                },
+                headers: {
+                'x-rapidapi-host': 'mlb-data.p.rapidapi.com',
+                'x-rapidapi-key': 'c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8'
+                }
+            };
+            const res = await axios.request(options)
+            const data = res.data.sport_hitting_tm.queryResults.row
+            setStats(stats => [...stats, data ])
         }
-        getData()
     }, [])
+
+    useEffect( () => {
+        getData()
+    }, [getData])
 
     return (
         <div>
