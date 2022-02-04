@@ -34,6 +34,18 @@ const player = ({name, height, weight, position, birthLocation, id, startYear}) 
     }, []) */
 
     useEffect( () => {
+        const options = {
+            method: 'GET',
+            url: '/api/playertable',
+            params: {
+                id,
+                start: startYear
+            },
+        };
+        axios.request(options).then(res => {
+            console.log(res.data)
+        })
+
         let currentYear = new Date().getFullYear()
         for (let i = startYear; i <= currentYear; i++) {
             const options = {
