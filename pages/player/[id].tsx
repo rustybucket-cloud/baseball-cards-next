@@ -6,8 +6,10 @@ const axios = require("axios").default;
 
 import Header from "../../components/Header"
 
+import Table from "../../components/Table";
+
 const player = ({name, height, weight, position, birthLocation, id, startYear}) => {
-    const [ stats, setStats ] = useState([])
+    /* const [ stats, setStats ] = useState([]) */
 
     /* const getData = useCallback( async () => {
         let currentYear = new Date().getFullYear()
@@ -33,8 +35,8 @@ const player = ({name, height, weight, position, birthLocation, id, startYear}) 
         }
     }, []) */
 
-    useEffect( () => {
-        const options = {
+    /* useEffect( () => {
+        /* const options = {
             method: 'GET',
             url: '/api/playertable',
             params: {
@@ -67,7 +69,7 @@ const player = ({name, height, weight, position, birthLocation, id, startYear}) 
                 setStats(stats => [...stats, data ]) 
             })
         }
-    }, [])
+    }, []) */
 
     return (
         <div>
@@ -75,44 +77,7 @@ const player = ({name, height, weight, position, birthLocation, id, startYear}) 
             <div className={mainStyles.mainWrapper}>
                 <main className={mainStyles.main}>
                     <h1>{name}</h1>
-                    <table className={styles.table}>
-                        <thead className={styles.thead}>
-                            <th>Year</th>
-                            <th>Team</th>
-                            <th>AVG</th>
-                            <th>AB</th>
-                            <th>H</th>
-                            <th>HR</th>
-                            <th>BB</th>
-                            <th>RBI</th>
-                            <th>SB</th>
-                            <th>SLG</th>
-                            <th>OBP</th>
-                            <th>OPS</th>
-                        </thead>
-                        <tbody>
-                            { stats.length > 0 ? stats.map( (year) => {
-                                if (year) {
-                                    return(
-                                        <tr>
-                                            <td>{year.season}</td>
-                                            <td>{year.team_abbrev}</td>
-                                            <td>{year.avg}</td>
-                                            <td>{year.ab}</td>
-                                            <td>{year.h}</td>
-                                            <td>{year.hr}</td>
-                                            <td>{year.bb}</td>
-                                            <td>{year.rbi}</td>
-                                            <td>{year.sb}</td>
-                                            <td>{year.slg}</td>
-                                            <td>{year.obp}</td>
-                                            <td>{year.ops}</td>
-                                        </tr>
-                                    )
-                                }
-                            }) : null }
-                        </tbody>
-                    </table>
+                    <Table id={id} startYear={startYear}/>
                 </main> 
             </div>
         </div>
