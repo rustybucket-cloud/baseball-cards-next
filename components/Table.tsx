@@ -8,21 +8,9 @@ const Table = ({id, startYear}) => {
     const [ stats, setStats ] = useState([])
 
     useEffect( () => {
-        /* const options = {
-            method: 'GET',
-            url: '/api/playertable',
-            params: {
-                id,
-                start: startYear
-            },
-        };
-        axios.request(options).then(res => {
-            console.log(res.data)
-        }) */
-
         let currentYear = new Date().getFullYear()
         for (let i = startYear; i <= currentYear; i++) {
-            const options = {
+                const options = {
                 method: 'GET',
                 url: 'https://mlb-data.p.rapidapi.com/json/named.sport_hitting_tm.bam',
                 params: {
@@ -35,14 +23,13 @@ const Table = ({id, startYear}) => {
                 'x-rapidapi-host': 'mlb-data.p.rapidapi.com',
                 'x-rapidapi-key': 'c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8'
                 }
-            };
-            axios.request(options).then(res => {
-                const data = res.data.sport_hitting_tm.queryResults.row
-                setStats(stats => [...stats, data ]) 
-            })
+                };
+                axios.request(options).then(res => {
+                    const data = res.data.sport_hitting_tm.queryResults.row
+                    setStats(stats => [...stats, data ])
+                })
         }
     }, [])
-
 
     return (
         <table className={styles.table}>
@@ -61,10 +48,10 @@ const Table = ({id, startYear}) => {
                 <th>OPS</th>
             </thead>
             <tbody>
-                { stats.length > 0 ? stats.map( (year) => {
+                {stats.map( (year, i) => {
                     if (year) {
-                        return(
-                            <tr>
+                        return (
+                            <tr key={i}>
                                 <td>{year.season}</td>
                                 <td>{year.team_abbrev}</td>
                                 <td>{year.avg}</td>
@@ -80,7 +67,8 @@ const Table = ({id, startYear}) => {
                              </tr>
                         )
                     }
-                }) : null }
+                    else null
+                }) }
             </tbody>
         </table>
     )
