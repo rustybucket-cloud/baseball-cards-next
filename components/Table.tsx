@@ -1,15 +1,17 @@
 import styles from "../styles/Player.module.css"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 const axios = require('axios').default
 
 const Table = ({id, startYear}) => {
     const [ stats, setStats ] = useState([])
 
-    useEffect( () => {
+    const getData = useCallback(async () => {
         let currentYear = new Date().getFullYear()
+        let years = []
         for (let i = startYear; i <= currentYear; i++) {
+            const yearData = new Promise(async (resolve, reject) => {
                 const options = {
                 method: 'GET',
                 url: 'https://mlb-data.p.rapidapi.com/json/named.sport_hitting_tm.bam',
@@ -24,11 +26,29 @@ const Table = ({id, startYear}) => {
                 'x-rapidapi-key': 'c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8'
                 }
                 };
-                axios.request(options).then(res => {
-                    const data = res.data.sport_hitting_tm.queryResults.row
-                    setStats(stats => [...stats, data ])
-                })
+                let data
+                try {
+                    data = await axios.request(options)
+                } catch (err) {
+                    reject(err)
+                } finally {
+                    console.log(data.data.sport_hitting_tm.queryResults.row)
+                    resolve(data.data.sport_hitting_tm.queryResults.row)
+                }
+            })
+            years.push(yearData)
         }
+        Promise.all(years).then(values => {
+            values.sort((a,b) => {
+                return b.season - a.season
+            })
+            setStats(values)
+        })
+    }, [])
+
+    useEffect( () => {
+        setStats([])
+        getData()
     }, [])
 
     return (

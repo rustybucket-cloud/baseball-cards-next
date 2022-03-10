@@ -27,15 +27,17 @@ export default player
 export const getServerSideProps = async (context) => {
     const id = context.params.id
 
+    require('dotenv').config()
+
     // request data
     const options = {
-    method: 'GET',
-    url: 'https://mlb-data.p.rapidapi.com/json/named.player_info.bam',
-    params: {sport_code: '\'mlb\'', player_id: `\'${id}\'`},
-    headers: {
-        'x-rapidapi-host': 'mlb-data.p.rapidapi.com',
-        'x-rapidapi-key': 'c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8'
-    }
+        method: 'GET',
+        url: 'https://mlb-data.p.rapidapi.com/json/named.player_info.bam',
+        params: {sport_code: '\'mlb\'', player_id: `\'${id}\'`},
+        headers: {
+            'x-rapidapi-host': 'mlb-data.p.rapidapi.com',
+            'x-rapidapi-key': process.env.API_KEY
+        }
     };
     const response  = await axios.request(options)
     const  data = response.data.player_info.queryResults.row

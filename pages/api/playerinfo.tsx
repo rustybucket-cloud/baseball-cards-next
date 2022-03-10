@@ -16,7 +16,7 @@ export default function handler(req, res) : void {
         params: {sport_code: '\'mlb\'', player_id: `\'${id}\'`},
         headers: {
             'x-rapidapi-host': 'mlb-data.p.rapidapi.com',
-            'x-rapidapi-key': 'c90b245b31msh46b59787848177ap15892cjsne103b05ba7a8'
+            'x-rapidapi-key': process.env.API_KEY
         }
     }
     
